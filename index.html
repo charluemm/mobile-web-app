@@ -1,24 +1,50 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>Task Notification</title>
-	<link rel="stylesheet" href="resources/css/jquery.mobile-1.4.5.min.css" />
-    <link rel="stylesheet" href="resources/css/style.css">
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-  </head>
+	<head>
+		<title>task notification</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-  <body>
-    <h1>task notification</h1>
+		<link rel="stylesheet" href="./vendor/font-awesome/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="./vendor/jquery-mobile/jquery.mobile-1.4.5.min.css" />
+		<link rel="stylesheet" href="./vendor/waves/waves.min.css" />
+		<link rel="stylesheet" href="./vendor/wow/animate.css" />
+		<link rel="stylesheet" href="./resources/css/nativedroid2.css" />
 
-    <section></section>
-	
-	<script src="resources/js/jquery-3.1.1.min.js"></script>
-	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-	<script src="resources/js/jquery.mobile-1.4.5.min.js"></script>
-	<script src="resources/js/app.js"></script>
-  </body>
+		<meta name="mobile-web-app-capable" content="yes">
+	 	<meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+	</head>
+	<body>
+
+		<div data-role="page">
+
+			<nd2-include data-src="./fragments/panel.left.html"></nd2-include>
+
+			<div data-role="panel" id="bottomsheet" data-animate="false" data-position='bottom' data-display="overlay">
+				<nd2-include data-src="./fragments/bottom.sheet.html"></nd2-include>
+			</div>
+
+			<div data-role="header" data-position="fixed" class="wow fadeInDown" data-wow-delay="0.2s">
+				<a href="#bottomsheet" class="ui-btn ui-btn-right wow fadeIn" data-wow-delay='1.2s'><i class="zmdi zmdi-more-vert"></i></a>
+				<a href="#leftpanel" class="ui-btn ui-btn-left wow fadeIn" data-wow-delay='0.8s'><i class="zmdi zmdi-menu"></i></a>
+				<h1 class="wow fadeIn" data-wow-delay='0.4s'>Page Title</h1>
+			</div>
+
+			<div role="main" class="ui-content" data-inset="false">
+				<p>(home)</p>
+			</div>
+
+		</div>
+
+		<script src="./vendor/jquery/jquery-3.1.1.min.js"></script>
+		<script src="./vendor/jquery/jquery-migrate-3.0.0.js"></script>
+		<script src="./vendor/jquery-ui/jquery-ui.min.js"></script>
+		<script src="./vendor/jquery-mobile/jquery.mobile-1.4.5.min.js"></script>
+		<script src="./vendor/waves/waves.min.js"></script>
+		<script src="./vendor/wow/wow.min.js"></script>
+		<script src="./resources/js/nativedroid2.js"></script>
+		<script src="./config/nd2settings.js"></script>
+
+	</body>
 </html>
