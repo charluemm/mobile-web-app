@@ -1,5 +1,7 @@
 # Push Notifications codelab
 
+- uses [**nativeDroid2**](http://nativedroid.godesign.ch/) jQuery mobile theme in material design as frontend UI
+
 Code for the Web Fundamentals [Push Notifications codelab](https://developers.google.com/web/fundamentals/getting-started/push-notifications/?hl=en).
 
 In this codelab, you'll learn how to add Push Notifications to web applications. This will enable you to re-engage users with breaking news and information about
