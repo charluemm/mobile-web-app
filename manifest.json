@@ -2,5 +2,5 @@
   "name": "Task Notification Web Application",
   "start_url": "index.html",
   "display": "standalone",
-  "orientation": "landscape"
+  "orientation": "portrait"
 }
