@@ -1,4 +1,4 @@
-# Push Notifications codelab
+# TaskY (Task Notification)
 
 - uses [**nativeDroid2**](http://nativedroid.godesign.ch/) jQuery mobile theme in material design as frontend UI
 
@@ -6,6 +6,7 @@
 
 ---
 
+# Push Notifications codelab
 
 Code for the Web Fundamentals [Push Notifications codelab](https://developers.google.com/web/fundamentals/getting-started/push-notifications/?hl=en).
 
