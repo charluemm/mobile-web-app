@@ -1,8 +1,10 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="de">
 <head>
 	<title>task notification</title>
 	<meta name="viewport" content="minimal-ui, width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
 	<link rel="manifest" href="manifest.json">
 
 	<link rel="stylesheet" href="./vendor/font-awesome/css/font-awesome.min.css"/>
@@ -159,15 +161,50 @@
 
 		<!-- TASKS -->
 		<div data-role="nd2tab" data-tab="tasks">
-			<ul data-role="listview" data-icon="false" class="ui-listview">
-				<li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-inherit ui-first-child">
-					Linked List
-				</li>
-				<li><a href="#" class="ui-btn waves-effect waves-button waves-effect waves-button">Banana</a></li>
-				<li><a href="#" class="ui-btn waves-effect waves-button waves-effect waves-button">Blackberry</a></li>
-				<li><a href="#" class="ui-btn waves-effect waves-button waves-effect waves-button">Tomato</a></li>
-				<li class="ui-last-child"><a href="#" class="ui-btn waves-effect waves-button waves-effect waves-button">Apple</a></li>
-			</ul>
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="box">
+						<div data-role="collapsible" data-inset="false">
+							<h4>Gruppennname</h4>
+							<ul data-role="listview">
+								<li>
+									<a href="#" class="ui-btn">
+										<h2>sit amet</h2>
+										<p>fällig am 20.12.2016</p>
+									</a>
+								</li>
+								<li>
+									<a href="#" class="ui-btn">
+										<h2>Termin 2</h2>
+										<p>fällig am 22.12.2016 <small>13:30 Uhr</small></p>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="box">
+						<ul data-role="listview">
+							<li>
+								<a href="#" class="ui-btn">
+									<h2>sit amet</h2>
+									<p>fällig am 20.12.2016</p>
+								</a>
+							</li>
+							<li>
+								<a href="#" class="ui-btn">
+									<h2>Termin 2</h2>
+									<p>fällig am 22.12.2016 <small>13:30 Uhr</small></p>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
 		</div>
 
 		<!-- GROUPS -->
