@@ -1,6 +1,6 @@
 
 $(document).ready(function(){
-    $('#btn-fab-add-task').on('click', function(){
+    $('#btn-fab-add-task').on('tap', function(){
         $('div[data-tab="tasks"]').load("fragments/form.task.add.html");
 
         $(document).trigger("createinclude");
