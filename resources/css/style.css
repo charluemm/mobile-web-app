@@ -1,5 +1,9 @@
+.ui-page-theme-b .ui-listview > li p,
 .ui-page-theme-b .ui-panel-inner > .ui-listview > .ui-li-divider,
-.ui-page-theme-b .ui-listview > li p{
+.ui-page-theme-b .ui-listview .ui-li-divider{
     color: #8e8e8e
 }
 
+.ui-page-theme-b .ui-btn:focus, html .ui-bar-b .ui-btn:focus, html .ui-body-b .ui-btn:focus, html body .ui-group-theme-b .ui-btn:focus, html head + body .ui-btn.ui-btn-b:focus, .ui-page-theme-b .ui-focus, html .ui-bar-b .ui-focus, html .ui-body-b .ui-focus, html body .ui-group-theme-b .ui-focus, html head + body .ui-btn-b.ui-focus, html head + body .ui-body-b.ui-focus {
+    box-shadow: none;
+}
