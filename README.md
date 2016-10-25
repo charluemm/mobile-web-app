@@ -16,7 +16,7 @@
 - Erstellen, Bearbeiten, Teilen von eigenen Listen mit anderen Benutzern
 - Benutzergruppen
 - Benachrichtigung, wenn
-    ○ neue Aufgabenliste geteilt wird
-    ○ Änderungen an einer Liste gemacht wurden
+    - neue Aufgabenliste geteilt wird
+    - Änderungen an einer Liste gemacht wurden
 - Benachrichtigung im Fenster, wenn App im Browser gestartet
 - Benachrichtigung als Push-Notification, wenn  App nicht gestartet
