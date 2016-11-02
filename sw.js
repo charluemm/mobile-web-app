@@ -1,3 +1,8 @@
+/**
+ * file to configure service worker
+ *
+ * @author Michael Mueller <development@reu-network.de>
+ */
 var VERSION = 'v11';
 
 this.addEventListener('install', function(event) {
@@ -14,6 +19,7 @@ this.addEventListener('fetch', function(event) {
         });
         return response.clone();
     }).catch(function() {
+        // TODO: Fallback
         return caches.match('/sw-test/gallery/myLittleVader.jpg');
     }));
 });

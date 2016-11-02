@@ -1,4 +1,8 @@
-// register service worker
+/**
+ * register service worker
+ *
+ * @author Michael Mueller <development@reu-network.de>
+ */
 if ('serviceWorker' in navigator)
 {
     navigator.serviceWorker.register('/task-notification/sw.js', { scope: '/task-notification/' }).then(function(reg) {
