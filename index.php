@@ -29,6 +29,9 @@
 </head>
 <body class="clr-accent-lime">
 
+<!-- LOGIN page-->
+<?php require_once('./fragments/page.login.html'); ?>
+
 <!-- HOME page-->
 <?php require_once('./fragments/page.home.html'); ?>
 
