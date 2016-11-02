@@ -3,7 +3,7 @@
  *
  * @author Michael Mueller <development@reu-network.de>
  */
-var VERSION = 'v23';
+var VERSION = 'v24';
 
 this.addEventListener('install', function(event) {
     event.waitUntil(
@@ -86,7 +86,8 @@ this.addEventListener('install', function(event) {
 
                 '/task-notification/resources/js/',
                 '/task-notification/resources/js/app.js',
-                '/task-notification/index.php',
+                '/task-notification/manifest.json',
+                '/task-notification/index.php'
             ]);
         })
     );
