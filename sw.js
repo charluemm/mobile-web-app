@@ -3,7 +3,7 @@
  *
  * @author Michael Mueller <development@reu-network.de>
  */
-var VERSION = 'v16';
+var VERSION = 'v17';
 
 this.addEventListener('install', function(event) {
     event.waitUntil(
@@ -24,7 +24,6 @@ this.addEventListener('install', function(event) {
                 '/task-notification/vendor/nativedroid2/fonts/Material-Design-Iconic-Font.svg',
                 '/task-notification/vendor/nativedroid2/fonts/Material-Design-Iconic-Font.ttf?v=2.0.0',
                 '/task-notification/vendor/nativedroid2/fonts/Material-Design-Iconic-Font.woff?v=2.0.0',
-
                 '/task-notification/vendor/nativedroid2/js/',
                 '/task-notification/vendor/nativedroid2/js/nativedroid2.js',
 
@@ -57,17 +56,20 @@ this.addEventListener('install', function(event) {
                 '/task-notification/vendor/waves/',
                 '/task-notification/vendor/waves/waves.min.js',
                 '/task-notification/vendor/waves/waves.min.js.map',
-
                 '/task-notification/vendor/waves/waves.min.css',
+
                 '/task-notification/vendor/wow/',
                 '/task-notification/vendor/wow/animate.css',
-
                 '/task-notification/vendor/wow/wow.min.js',
+
                 '/task-notification/config/',
                 '/task-notification/config/nd2settings.js',
                 '/task-notification/fragments/',
                 '/task-notification/fragments/bottom.sheet.html',
                 '/task-notification/fragments/panel.left.html',
+                '/task-notification/fragments/page.home.html',
+                '/task-notification/fragments/page.task.add.html',
+
                 '/task-notification/resources/',
                 '/task-notification/resources/css/',
                 '/task-notification/resources/css/style.css',
@@ -78,11 +80,11 @@ this.addEventListener('install', function(event) {
                 '/task-notification/resources/img/examples/card_bg_3.jpg',
                 '/task-notification/resources/img/examples/card_thumb_1.jpg',
                 '/task-notification/resources/img/examples/card_thumb_2.jpg',
-
                 '/task-notification/resources/img/examples/card_thumb_3.jpg',
+
                 '/task-notification/resources/js/',
                 '/task-notification/resources/js/app.js',
-                '/task-notification/index.html',
+                '/task-notification/index.php',
             ]);
         })
     );

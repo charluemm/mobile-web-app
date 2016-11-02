@@ -1,0 +1,28 @@
+<div data-theme="b" data-role="page" id="TaskAdd">
+	<div data-role="header" data-position="fixed" class="wow fadeInDown">
+		<a href="#" data-direction="reverse" data-role="button" data-position="left" data-rel="back" data-inline="true" data-transition="slide" class="ui-btn ui-btn-left wow fadeIn" data-wow-delay='0.8s'><i class="zmdi zmdi-close"></i></a>
+		<h1 class="wow fadeIn" data-wow-delay='0.4s'>Erstellen</h1>
+		<a href="#" class="wow fadeIn" data-position="right" data-role="button" data-inline="true" data-wow-delay='1.2s'><i class="zmdi zmdi-save"></i></a>
+	</div>
+
+	<div role="main" class="ui-content wow fadeIn" data-inset="false" data-wow-delay="0.2s">
+		<form>
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="box">
+						<input type="text" name="titel" id="title" value="" data-clear-btn="true" placeholder="Title">
+						<input type="text" name="location" id="location" value="" data-clear-btn="true" placeholder="Ort">
+						<input type="text" name="description" id="description" value="" data-clear-btn="true" placeholder="Beschreibung">
+						<fieldset data-role="controlgroup">
+							<legend>Checkboxes</legend>
+						</fieldset>
+						<label for="startDate">Begin</label>
+						<input type="date" name="startDate" id="startDate" value="" data-clear-btn="true" placeholder="">
+						<label for="dueDate">Fällig</label>
+						<input type="date" name="dueDate" id="dueDate" value="" data-clear-btn="true" placeholder="">
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
