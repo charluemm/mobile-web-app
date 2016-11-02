@@ -32,6 +32,9 @@
 <!-- LOGIN page-->
 <?php require_once('./fragments/page.login.html'); ?>
 
+<!-- REGISTER page-->
+<?php require_once('./fragments/page.register.html'); ?>
+
 <!-- HOME page-->
 <?php require_once('./fragments/page.home.html'); ?>
 

@@ -3,7 +3,7 @@
  *
  * @author Michael Mueller <development@reu-network.de>
  */
-var VERSION = 'v19';
+var VERSION = 'v20';
 
 this.addEventListener('install', function(event) {
     event.waitUntil(
@@ -69,6 +69,7 @@ this.addEventListener('install', function(event) {
                 '/task-notification/fragments/panel.left.html',
                 '/task-notification/fragments/page.home.html',
                 '/task-notification/fragments/page.login.html',
+                '/task-notification/fragments/page.register.html',
                 '/task-notification/fragments/page.task.add.html',
 
                 '/task-notification/resources/',
