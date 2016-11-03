@@ -99,8 +99,10 @@ this.addEventListener('fetch', function(event) {
         return fetch(event.request);
     }).then(function(r) {
         response = r;
+
         caches.open(VERSION).then(function(cache) {
-            cache.put(event.request, response);
+            if(typeof response == 'Response')
+                cache.put(event.request, response);
         });
         return response.clone();
     }).catch(function() {
