@@ -3,7 +3,6 @@
  *
  * @author Michael Mueller <development@reu-network.de>
  * @author David Howon <maestroderjoker@googlemail.com>
- * 
  */
 if ('serviceWorker' in navigator)
 {
