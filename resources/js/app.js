@@ -5,7 +5,7 @@
  */
 if ('serviceWorker' in navigator)
 {
-    navigator.serviceWorker.register('/sw.js', { scope: '/' }).then(function(reg) {
+    navigator.serviceWorker.register('/task-notification/sw.js', { scope: '/task-notification/' }).then(function(reg) {
 
         if(reg.installing)
         {
