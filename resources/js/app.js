@@ -50,6 +50,10 @@ $('#submit-login').on('click', function(e){
             console.log(data);
         },
         error: function(xhr, options, error){
+            new $.nd2Toast({
+                message: "Error occurred!",
+                ttl: 3000
+            });
             console.log("Error");
         }
     });
