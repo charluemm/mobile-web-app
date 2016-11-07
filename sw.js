@@ -3,34 +3,34 @@
  *
  * @author Michael Mueller <development@reu-network.de>
  */
-var VERSION = 'v35';
+var VERSION = 'v36';
 
 this.addEventListener('install', function(event) {
     event.waitUntil(
         caches.open(VERSION).then(function(cache) {
             return cache.addAll([
-                './',
-                './vendor/',
-
-                './vendor/nativedroid2/',
-                './vendor/nativedroid2/css/',
+                //'./',
+                // './vendor/',
+                //
+                // './vendor/nativedroid2/',
+                // './vendor/nativedroid2/css/',
                 './vendor/nativedroid2/css/nativedroid2.css',
                 './vendor/nativedroid2/css/nativedroid2.color.blue-grey.css',
                 './vendor/nativedroid2/css/nativedroid2.color.teal.css',
                 './vendor/nativedroid2/css/flexboxgrid.min.css',
                 './vendor/nativedroid2/css/material-design-iconic-font.min.css',
-                './vendor/nativedroid2/fonts/',
+                //'./vendor/nativedroid2/fonts/',
                 './vendor/nativedroid2/fonts/Material-Design-Iconic-Font.eot',
                 './vendor/nativedroid2/fonts/Material-Design-Iconic-Font.svg',
                 './vendor/nativedroid2/fonts/Material-Design-Iconic-Font.ttf?v=2.0.0',
                 './vendor/nativedroid2/fonts/Material-Design-Iconic-Font.woff?v=2.0.0',
-                './vendor/nativedroid2/js/',
+                //'./vendor/nativedroid2/js/',
                 './vendor/nativedroid2/js/nativedroid2.js',
 
-                './vendor/font-awesome/',
-                './vendor/font-awesome/css/',
+                //'./vendor/font-awesome/',
+                //'./vendor/font-awesome/css/',
                 './vendor/font-awesome/css/font-awesome.min.css',
-                './vendor/font-awesome/fonts/',
+                //'./vendor/font-awesome/fonts/',
                 './vendor/font-awesome/fonts/FontAwesome.otf',
                 './vendor/font-awesome/fonts/fontawesome-webfont.eot',
                 './vendor/font-awesome/fonts/fontawesome-webfont.svg',
@@ -38,33 +38,33 @@ this.addEventListener('install', function(event) {
                 './vendor/font-awesome/fonts/fontawesome-webfont.woff?v=4.6.3',
                 './vendor/font-awesome/fonts/fontawesome-webfont.woff2?v=4.6.3',
 
-                './vendor/jquery/',
+                //'./vendor/jquery/',
                 './vendor/jquery/jquery-3.1.1.min.js',
 
                 './vendor/jquery/jquery-migrate-3.0.0.js',
-                './vendor/jquery-mobile/',
+                //'./vendor/jquery-mobile/',
                 './vendor/jquery-mobile/jquery.mobile-1.4.5.min.js',
                 './vendor/jquery-mobile/jquery.mobile-1.4.5.min.css',
-                './vendor/jquery-mobile/images/',
+                //'./vendor/jquery-mobile/images/',
 
                 './vendor/jquery-mobile/images/ajax-loader.gif',
-                './vendor/jquery-ui/',
-                './vendor/jquery-ui/images/',
+                //'./vendor/jquery-ui/',
+                //'./vendor/jquery-ui/images/',
                 './vendor/jquery-ui/jquery-ui.min.js',
 
                 './vendor/jquery-ui/jquery-ui.min.css',
-                './vendor/waves/',
+                //'./vendor/waves/',
                 './vendor/waves/waves.min.js',
                 './vendor/waves/waves.min.js.map',
                 './vendor/waves/waves.min.css',
 
-                './vendor/wow/',
+                //'./vendor/wow/',
                 './vendor/wow/animate.css',
                 './vendor/wow/wow.min.js',
 
-                './config/',
+                //'./config/',
                 './config/nd2settings.js',
-                './fragments/',
+                //'./fragments/',
                 './fragments/bottom.sheet.html',
                 './fragments/panel.left.html',
                 './fragments/page.home.html',
@@ -72,12 +72,12 @@ this.addEventListener('install', function(event) {
                 './fragments/page.register.html',
                 './fragments/page.task.add.html',
 
-                './resources/',
-                './resources/css/',
+                //'./resources/',
+                //'./resources/css/',
                 './resources/css/style.css',
-                './resources/fonts/',
+                //'./resources/fonts/',
                 './resources/fonts/Roboto-Regular.ttf',
-                './resources/img/',
+                //'./resources/img/',
                 './resources/img/2.jpg',
                 './resources/img/8.jpg',
                 './resources/img/9.jpg',
@@ -90,7 +90,7 @@ this.addEventListener('install', function(event) {
                 './resources/img/examples/card_thumb_2.jpg',
                 './resources/img/examples/card_thumb_3.jpg',
 
-                './resources/js/',
+                //'./resources/js/',
                 './resources/js/app.js',
                 './manifest.json',
                 './index.php'
@@ -127,7 +127,7 @@ this.addEventListener('fetch', function(event) {
                         // to clone it so we have two streams.
                         var responseToCache = response.clone();
 
-                        caches.open(CACHE_NAME)
+                        caches.open(VERSION)
                             .then(function(cache) {
                                 cache.put(event.request, responseToCache);
                             });
