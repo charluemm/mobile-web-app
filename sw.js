@@ -100,6 +100,10 @@ this.addEventListener('install', function(event) {
 });
 
 this.addEventListener('fetch', function(event) {
+
+    if (event.request.methd !== 'GET') { return; }
+    if (event.request.url.indexOf('http://localhost:3000/api') !== -1) { return; }
+
     event.respondWith(
         caches.match(event.request)
             .then(function(response) {
