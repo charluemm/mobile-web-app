@@ -3,7 +3,7 @@
  *
  * @author Michael Mueller <development@reu-network.de>
  */
-var VERSION = 'v32';
+var VERSION = 'v34';
 
 this.addEventListener('install', function(event) {
     event.waitUntil(
@@ -78,6 +78,10 @@ this.addEventListener('install', function(event) {
                 '/task-notification/resources/fonts/',
                 '/task-notification/resources/fonts/Roboto-Regular.ttf',
                 '/task-notification/resources/img/',
+                '/task-notification/resources/img/2.jpg',
+                '/task-notification/resources/img/8.jpg',
+                '/task-notification/resources/img/9.jpg',
+                '/task-notification/resources/img/10.jpg',
                 '/task-notification/resources/img/examples/',
                 '/task-notification/resources/img/examples/card_bg_1.jpg',
                 '/task-notification/resources/img/examples/card_bg_2.jpg',
@@ -96,21 +100,59 @@ this.addEventListener('install', function(event) {
 });
 
 this.addEventListener('fetch', function(event) {
-    var response;
-    event.respondWith(caches.match(event.request).catch(function() {
-        return fetch(event.request);
-    }).then(function(r) {
-        response = r;
+    event.respondWith(
+        caches.match(event.request)
+            .then(function(response) {
+                // Cache hit - return response
+                if (response) {
+                    return response;
+                }
 
-        caches.open(VERSION).then(function(cache) {
-            if(typeof response == 'Response')
-                cache.put(event.request, response);
-        });
-        return response.clone();
-    }).catch(function() {
-        // TODO: Fallback
-        return null; // caches.match('/sw-test/gallery/myLittleVader.jpg');
-    }));
+                // IMPORTANT: Clone the request. A request is a stream and
+                // can only be consumed once. Since we are consuming this
+                // once by cache and once by the browser for fetch, we need
+                // to clone the response.
+                var fetchRequest = event.request.clone();
+
+                return fetch(fetchRequest).then(
+                    function(response) {
+                        // Check if we received a valid response
+                        if(!response || response.status !== 200 || response.type !== 'basic') {
+                            return response;
+                        }
+
+                        // IMPORTANT: Clone the response. A response is a stream
+                        // and because we want the browser to consume the response
+                        // as well as the cache consuming the response, we need
+                        // to clone it so we have two streams.
+                        var responseToCache = response.clone();
+
+                        caches.open(CACHE_NAME)
+                            .then(function(cache) {
+                                cache.put(event.request, responseToCache);
+                            });
+
+                        return response;
+                    }
+                );
+            })
+    );
+
+    // var response;
+    // event.respondWith(caches.match(event.request).catch(function() {
+    //     return fetch(event.request);
+    // }).then(function(r) {
+    //     response = r;
+    //
+    //     caches.open(VERSION).then(function(cache) {
+    //         if(typeof response == 'Response')
+    //             cache.put(event.request, response);
+    //     });
+    //     return response.clone();
+    // }).catch(function() {
+    //     // TODO: Fallback
+    //     return null; // caches.match('/sw-test/gallery/myLittleVader.jpg');
+    // }));
 });
 
 this.addEventListener('activate', function(event) {
