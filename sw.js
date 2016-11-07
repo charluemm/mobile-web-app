@@ -3,7 +3,7 @@
  *
  * @author Michael Mueller <development@reu-network.de>
  */
-var VERSION = 'v25';
+var VERSION = 'v26';
 
 this.addEventListener('install', function(event) {
     event.waitUntil(
@@ -75,6 +75,8 @@ this.addEventListener('install', function(event) {
                 '/task-notification/resources/',
                 '/task-notification/resources/css/',
                 '/task-notification/resources/css/style.css',
+                '/task-notification/resources/fonts/',
+                '/task-notification/resources/fonts/Roboto-Regular.ttf',
                 '/task-notification/resources/img/',
                 '/task-notification/resources/img/examples/',
                 '/task-notification/resources/img/examples/card_bg_1.jpg',
