@@ -1,4 +1,9 @@
-@import url("../fonts/Roboto-Regular.ttf");
+@font-face {
+    font-family: 'FontAwesome';
+    src: url('../fonts/Roboto-Regular.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
 
 body, input, select, textarea, button, .ui-btn,h1,h2,h3,h4,h5,h6 {
     font-family: "Roboto","Helvetica Neue",sans-serif;

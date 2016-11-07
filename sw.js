@@ -3,7 +3,7 @@
  *
  * @author Michael Mueller <development@reu-network.de>
  */
-var VERSION = 'v26';
+var VERSION = 'v32';
 
 this.addEventListener('install', function(event) {
     event.waitUntil(
@@ -109,7 +109,7 @@ this.addEventListener('fetch', function(event) {
         return response.clone();
     }).catch(function() {
         // TODO: Fallback
-        return caches.match('/sw-test/gallery/myLittleVader.jpg');
+        return null; // caches.match('/sw-test/gallery/myLittleVader.jpg');
     }));
 });
 
