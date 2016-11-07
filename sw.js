@@ -82,7 +82,7 @@ this.addEventListener('install', function(event) {
                 './resources/img/8.jpg',
                 './resources/img/9.jpg',
                 './resources/img/10.jpg',
-                './resources/img/examples/',
+                //'./resources/img/examples/',
                 './resources/img/examples/card_bg_1.jpg',
                 './resources/img/examples/card_bg_2.jpg',
                 './resources/img/examples/card_bg_3.jpg',
