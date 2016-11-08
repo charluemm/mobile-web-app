@@ -31,7 +31,7 @@ if ('serviceWorker' in navigator)
 // LOGIN
 $('#submit-login').on('click', function(e){
     e.preventDefault();
-    var data = $('#frmLogin').serialize();;
+    var data = $('#frmLogin').serialize();
     $.ajax({
         type: "POST",
         // TODO: load URL from config
@@ -40,21 +40,24 @@ $('#submit-login').on('click', function(e){
         success: function(data){
             if(data.success)
                 // TODO: save token in local storage
-                jQuery.mobile.changePage("#Home");
+                jQuery.mobile.changePage("#Home", {
+                    transition: "slide",
+                    reverse: true,
+                });
             else
                 new $.nd2Toast({
                     message: data.message,
                     ttl: 3000
                 });
 
-            console.log(data);
+            $('.nd2-toast').addClass('alert-danger');
         },
         error: function(xhr, options, error){
             new $.nd2Toast({
-                message: "Error occurred!",
+                message: "Error occurred! " + error,
                 ttl: 3000
             });
-            console.log("Error");
+            $('.nd2-toast').addClass('alert-danger');
         }
-    });
+    })
 });

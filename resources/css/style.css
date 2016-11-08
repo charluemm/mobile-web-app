@@ -5,13 +5,25 @@
     font-style: normal;
 }
 
-body, input, select, textarea, button, .ui-btn,h1,h2,h3,h4,h5,h6 {
-    font-family: "Roboto","Helvetica Neue",sans-serif;
+body, input, select, textarea, button, .ui-btn, h1, h2, h3, h4, h5, h6 {
+    font-family: "Roboto", "Helvetica Neue", sans-serif;
     font-weight: 400;
 }
 
 .ui-page-theme-b .ui-listview > li p,
 .ui-page-theme-b .ui-listview .ui-li-divider,
-.ui-page-theme-b .ui-panel-inner > .ui-listview > .ui-li-divider{
+.ui-page-theme-b .ui-panel-inner > .ui-listview > .ui-li-divider {
     color: #8e8e8e
+}
+
+.alert-danger {
+    background-color: #f44336;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.btn-primary{
+    color: #2ad !important;
+}
+.ui-btn-active{
+    color: #FFF !important;
 }
