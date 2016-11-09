@@ -13,7 +13,7 @@ this.addEventListener('install', function(event) {
                 //'./vendor/',
 
                 //'./vendor/nativedroid2/',
-                './vendor/nativedroid2/css/',
+                // './vendor/nativedroid2/css/',
                 './vendor/nativedroid2/css/nativedroid2.css',
                 './vendor/nativedroid2/css/nativedroid2.color.blue-grey.css',
                 './vendor/nativedroid2/css/nativedroid2.color.teal.css',
