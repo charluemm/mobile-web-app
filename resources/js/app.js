@@ -5,6 +5,8 @@
  * @author David Howon <maestroderjoker@googlemail.com>
  */
 
+var API_URL = "http://localhost/nodejs/api";
+
 if ('serviceWorker' in navigator)
 {
     navigator.serviceWorker.register('sw.js').then(function(reg) {
@@ -35,7 +37,7 @@ $('#submit-login').on('click', function(e){
     $.ajax({
         type: "POST",
         // TODO: load URL from config
-        url: "http://localhost/nodejs/api/authenticate",
+        url: API_URL + "/authenticate",
         data: data,
         success: function(data){
             if(data.success)
