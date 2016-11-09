@@ -3,17 +3,17 @@
  *
  * @author Michael Mueller <development@reu-network.de>
  */
-var VERSION = 'v36';
+var VERSION = 'v42';
 
 this.addEventListener('install', function(event) {
     event.waitUntil(
         caches.open(VERSION).then(function(cache) {
             return cache.addAll([
                 //'./',
-                // './vendor/',
-                //
-                // './vendor/nativedroid2/',
-                // './vendor/nativedroid2/css/',
+                //'./vendor/',
+
+                //'./vendor/nativedroid2/',
+                './vendor/nativedroid2/css/',
                 './vendor/nativedroid2/css/nativedroid2.css',
                 './vendor/nativedroid2/css/nativedroid2.color.blue-grey.css',
                 './vendor/nativedroid2/css/nativedroid2.color.teal.css',
@@ -101,34 +101,34 @@ this.addEventListener('install', function(event) {
 
 this.addEventListener('fetch', function(event) {
 
-    if (event.request.methd !== 'GET') { return; }
+    if (event.request.method !== 'GET') { return; }
     if (event.request.url.indexOf('http://localhost:3000/api') !== -1) { return; }
 
     event.respondWith(
         caches.match(event.request)
             .then(function(response) {
-                // Cache hit - return response
+                //Cache hit - return response
                 if (response) {
                     return response;
                 }
 
-                // IMPORTANT: Clone the request. A request is a stream and
-                // can only be consumed once. Since we are consuming this
-                // once by cache and once by the browser for fetch, we need
-                // to clone the response.
+                //IMPORTANT: Clone the request. A request is a stream and
+                //can only be consumed once. Since we are consuming this
+                //once by cache and once by the browser for fetch, we need
+                //to clone the response.
                 var fetchRequest = event.request.clone();
 
                 return fetch(fetchRequest).then(
                     function(response) {
-                        // Check if we received a valid response
+                        //Check if we received a valid response
                         if(!response || response.status !== 200 || response.type !== 'basic') {
                             return response;
                         }
 
-                        // IMPORTANT: Clone the response. A response is a stream
-                        // and because we want the browser to consume the response
-                        // as well as the cache consuming the response, we need
-                        // to clone it so we have two streams.
+                        //IMPORTANT: Clone the response. A response is a stream
+                        //and because we want the browser to consume the response
+                        //as well as the cache consuming the response, we need
+                        //to clone it so we have two streams.
                         var responseToCache = response.clone();
 
                         caches.open(VERSION)
