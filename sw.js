@@ -3,7 +3,7 @@
  *
  * @author Michael Mueller <development@reu-network.de>
  */
-var VERSION = 'v42';
+var VERSION = 'v43';
 
 this.addEventListener('install', function(event) {
     event.waitUntil(
