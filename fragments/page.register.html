@@ -6,15 +6,15 @@
 	</div>
 
 	<div role="main" class="ui-content wow fadeIn" data-inset="false" data-wow-delay="0.2s">
-		<form>
+		<form id="frmRegistration" method="POST">
 			<div class="row">
 				<div class="col-xs-12">
 					<div class="box">
 						<input type="text" name="username" id="username" value="" data-clear-btn="true" placeholder="Benutzername">
 						<input type="email" name="email" id="email" value="" data-clear-btn="true" placeholder="E-Mail Adresse">
 						<input type="password" name="password" id="password" value="" data-clear-btn="true" placeholder="Passwort">
-						<input type="password" name="password2" id="password2" value="" data-clear-btn="true" placeholder="Passwort wiederholen">
-						<input type="submit" value="Registrieren" data-role="button" />
+						<input type="password" name="confirm_password" id="confirm_password" value="" data-clear-btn="true" placeholder="Passwort wiederholen">
+						<input type="submit" value="Registrieren" data-role="button" id="submit-registration" />
 					</div>
 				</div>
 			</div>

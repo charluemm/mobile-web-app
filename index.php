@@ -44,6 +44,7 @@
 <script src="./vendor/jquery/jquery-3.1.1.min.js"></script>
 <script src="./vendor/jquery/jquery-migrate-3.0.0.js"></script>
 <script src="./vendor/jquery-ui/jquery-ui.min.js"></script>
+<script src="./vendor/jquery-validate/jquery.validate.min.js"></script>
 <script src="./vendor/jquery-mobile/jquery.mobile-1.4.5.min.js"></script>
 <script src="./vendor/waves/waves.min.js"></script>
 <script src="./vendor/wow/wow.min.js"></script>

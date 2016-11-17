@@ -5,7 +5,7 @@
  */
 
 var API_URL = "http://localhost/nodejs/api";
-var VERSION = 'v46';
+var VERSION = 'v48';
 
 this.addEventListener('install', function(event) {
     event.waitUntil(
