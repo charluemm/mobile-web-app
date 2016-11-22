@@ -30,31 +30,16 @@ if ('serviceWorker' in navigator)
     });
 }
 
-// LOCAL STORAGE configuration
-// if (typeof(Storage) !== "undefined") {
-//     console.log("Local Storage supported");
-// } else {
-//    console.log("Local Storage not supported");
-// }
-
-// check password confirmation
-// $('#password, #confirm_password').on('keyup', function () {
-//     if ($('#password').val() == $('#confirm_password').val()) {
-//         $('#message').html('Matching').css('color', 'green');
-//     } else
-//         $('#message').html('Not Matching').css('color', 'red');
-// });
-
 // CHECK AUTHENTICATION on each pageload
 $(document).on("pagebeforecreate",function(event){
-    console.log(event);
     // CHECK AUTHENTICATION
     if (typeof(Storage) !== "undefined")
     {
         var userToken = localStorage.getItem("auth-token");
-        if(userToken)
+        var target = event.target.id;
+
+        if(userToken || target === "Register")
         {
-            var target = event.target.id;
             jQuery.mobile.changePage("#"+target, {
                 transition: "slide",
                 reverse: false,
@@ -71,55 +56,6 @@ $(document).on("pagebeforecreate",function(event){
     else
     {
         console.log("Storage not supported");
-    }
-});
-
-$('#frmRegistration').validate({
-    rules: {
-        username: {
-            required: true,
-            minlength: 2
-        },
-        email: {
-            required: true,
-            email: true
-        },
-        password: {
-            required: true,
-            minlength: 5
-        },
-        confirm_password: {
-            required: true,
-            minlength: 5,
-            equalTo: "#password"
-        }
-    },
-    messages: {
-        username: {
-            required: "Please enter your username.",
-            minlength: "Your username must consist of at least 2 characters."
-        },
-        email: {
-            required: "Please enter your email.",
-            email: "Please enter a valid email."
-        },
-        password: {
-            required: "Please enter your password.",
-            minlength: "Your password must consist of at least 5 characters."
-        },
-        confirm_password: {
-            required: "Please confirm your password.",
-            minlength: "Your password must consist of at least 5 characters.",
-            equalTo: "Your passwords doesn't match."
-        }
-    },
-    errorPlacement: function (error, element) {
-        console.log(element);
-        error.appendTo(element.parent());
-    },
-    submitHandler: function (form) {
-        alert("top");
-        return false;
     }
 });
 

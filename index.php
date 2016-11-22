@@ -51,6 +51,7 @@
 <script src="./vendor/nativedroid2/js/nativedroid2.js"></script>
 <script src="./config/nd2settings.js"></script>
 <script src="./resources/js/pushFunctions.js"></script>
+<script src="./resources/js/validation.js"></script>
 <script src="./resources/js/app.js"></script>
 </body>
 </html>
