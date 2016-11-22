@@ -7,6 +7,7 @@
 
 var API_URL = "http://localhost/nodejs/api";
 
+// SERVICE WORKER configuration
 if ('serviceWorker' in navigator)
 {
     navigator.serviceWorker.register('sw.js').then(function(reg) {
@@ -29,6 +30,12 @@ if ('serviceWorker' in navigator)
     });
 }
 
+// LOCAL STORAGE configuration
+// if (typeof(Storage) !== "undefined") {
+//     console.log("Local Storage supported");
+// } else {
+//    console.log("Local Storage not supported");
+// }
 
 // check password confirmation
 // $('#password, #confirm_password').on('keyup', function () {
@@ -37,6 +44,35 @@ if ('serviceWorker' in navigator)
 //     } else
 //         $('#message').html('Not Matching').css('color', 'red');
 // });
+
+// CHECK AUTHENTICATION on each pageload
+$(document).on("pagebeforecreate",function(event){
+    console.log(event);
+    // CHECK AUTHENTICATION
+    if (typeof(Storage) !== "undefined")
+    {
+        var userToken = localStorage.getItem("auth-token");
+        if(userToken)
+        {
+            var target = event.target.id;
+            jQuery.mobile.changePage("#"+target, {
+                transition: "slide",
+                reverse: false,
+            });
+        }
+        else
+        {
+            jQuery.mobile.changePage("#Login", {
+                transition: "slide",
+                reverse: false,
+            });
+        }
+    }
+    else
+    {
+        console.log("Storage not supported");
+    }
+});
 
 $('#frmRegistration').validate({
     rules: {
@@ -131,24 +167,30 @@ $('#submit-login').on('click', function(e){
     e.preventDefault();
     var data = $('#frmLogin').serialize();
     $.ajax({
-        type: "POST",
-        url: API_URL + "/authenticate",
-        data: data,
         success: function(data){
             if(data.success)
-                // TODO: save token in local storage
+            {
+                // save token in local storage
+                localStorage.setItem("auth-token", data.token);
+                // redirect to #Home
                 jQuery.mobile.changePage("#Home", {
                     transition: "slide",
                     reverse: true,
                 });
+            }
             else
+            {
                 new $.nd2Toast({
                     message: data.message,
                     ttl: 3000
                 });
 
-            $('.nd2-toast').addClass('alert-danger');
+                $('.nd2-toast').addClass('alert-danger');
+            }
         },
+        type: "POST",
+        url: API_URL + "/authenticate",
+        data: data,
         error: function(xhr, options, error){
             new $.nd2Toast({
                 message: "Error occurred! " + error,

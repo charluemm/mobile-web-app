@@ -5,7 +5,7 @@
  */
 
 var API_URL = "http://localhost/nodejs/api";
-var VERSION = 'v48';
+var VERSION = 'v49';
 
 this.addEventListener('install', function(event) {
     event.waitUntil(
@@ -36,6 +36,7 @@ this.addEventListener('install', function(event) {
                 './vendor/jquery-mobile/images/ajax-loader.gif',
                 './vendor/jquery-ui/jquery-ui.min.js',
                 './vendor/jquery-ui/jquery-ui.min.css',
+                './vendor/jquery-validate/jquery.validate.min.js',
 
                 './vendor/waves/waves.min.js',
                 './vendor/waves/waves.min.js.map',
@@ -126,53 +127,40 @@ this.addEventListener('activate', function(event) {
 // @author DavidHowon   
 // Push Message with Icon and redirect to Google.de
 
-'use strict';
+self.addEventListener('push', function(event) {
+  console.log('Push message', event);
 
-	console.log('Started', self);
-	
-	self.addEventListener('install', function(event) {
-	  self.skipWaiting();
-	  console.log('Installed', event);
-	});
-	
-	self.addEventListener('activate', function(event) {
-	  console.log('Activated', event);
-	});
-	
-	self.addEventListener('push', function(event) {
-	  console.log('Push message', event);
-	
-	  var title = 'Push Message';
-	
-	  event.waitUntil(
-	    self.registration.showNotification(title, {
-	      'body': 'The Message',
-	      'icon': 'img/icon.png'
-	    }));
-	});
-	
-	self.addEventListener('notificationclick', function(event) {
-	  console.log('Notification click: tag', event.notification.tag);
-	  
-	  event.notification.close();
-	  var url = 'https://www.google.de';
-	  
-	  event.waitUntil(
-	    clients.matchAll({
-	      type: 'window'
-	    })
-	    .then(function(windowClients) {
-	      console.log('WindowClients', windowClients);
-	      for (var i = 0; i < windowClients.length; i++) {
-	        var client = windowClients[i];
-	        console.log('WindowClient', client);
-	        if (client.url === url && 'focus' in client) {
-	          return client.focus();
-	        }
-	      }
-	      if (clients.openWindow) {
-	        return clients.openWindow(url);
-	      }
-	    })
-	  );
-	});
+  var title = 'Push Message';
+
+  event.waitUntil(
+    self.registration.showNotification(title, {
+      'body': 'The Message',
+      'icon': 'img/icon.png'
+    }));
+});
+
+self.addEventListener('notificationclick', function(event) {
+  console.log('Notification click: tag', event.notification.tag);
+
+  event.notification.close();
+  var url = 'https://www.google.de';
+
+  event.waitUntil(
+    clients.matchAll({
+      type: 'window'
+    })
+    .then(function(windowClients) {
+      console.log('WindowClients', windowClients);
+      for (var i = 0; i < windowClients.length; i++) {
+        var client = windowClients[i];
+        console.log('WindowClient', client);
+        if (client.url === url && 'focus' in client) {
+          return client.focus();
+        }
+      }
+      if (clients.openWindow) {
+        return clients.openWindow(url);
+      }
+    })
+  );
+});
