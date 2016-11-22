@@ -2,5 +2,6 @@
   "name": "Tasky",
   "start_url": "index.php",
   "display": "standalone",
-  "orientation": "portrait"
+  "orientation": "portrait",
+  "gcm_sender_id": "555834072004"
 }
