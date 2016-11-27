@@ -4,20 +4,22 @@ function checkSubscription() {
     navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
       serviceWorkerRegistration.pushManager.getSubscription().then(
         function(pushSubscription) {
-          if(!!pushSubscription) {
+          if(pushSubscription) {
+          	console.log("Push Subscription exists");
             //Send subscription to application server
             sendSub(pushSubscription);
  
             //Manage interface
             pushStatus = true;
-            document.getElementById("pushStatus").checked = true;
-            document.getElementById("pushStatusMsg").innerHTML = '<span>You are subscribed!</span>';
+            //document.getElementById("pushStatus").checked = true;
+            //document.getElementById("pushStatusMsg").innerHTML = '<span>You are subscribed!</span>';
           }
           else {
+          	console.log("Push Subscription not existing");
             //Manage interface
             pushStatus = false;
-            document.getElementById("pushStatus").checked = false;
-            document.getElementById("pushStatusMsg").innerHTML = '<span>You are not subscribed!</span>';
+            //document.getElementById("pushStatus").checked = false;
+            //document.getElementById("pushStatusMsg").innerHTML = '<span>You are not subscribed!</span>';
           }
         }.bind(this)).catch(function(e) {
           console.error('Error getting subscription', e);
