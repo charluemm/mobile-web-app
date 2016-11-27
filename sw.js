@@ -164,3 +164,16 @@ self.addEventListener('notificationclick', function(event) {
     })
   );
 });
+
+
+self.addEventListener('push', function(e) {
+  console.log('push received');
+ 
+  // Get the notification data, then display notification
+});
+
+fetch(API_URL + "/push/sw/latest.json").then(function(res) {
+    res.json().then(function(data) {
+          // Show notification       
+    })
+  })
