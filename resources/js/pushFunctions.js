@@ -16,7 +16,8 @@ function checkSubscription() {
           }
           else {
           	console.log("Push Subscription not existing");
-            //Manage interface
+            subscribePush();
+          	//Manage interface
             pushStatus = false;
             //document.getElementById("pushStatus").checked = false;
             //document.getElementById("pushStatusMsg").innerHTML = '<span>You are not subscribed!</span>';
@@ -39,8 +40,8 @@ function subscribePush() {
 	        sendSub(pushSubscription);
 	        
 	        //Update status of interface
-	        document.getElementById("pushStatus").checked = true;
-	        document.getElementById("pushStatusMsg").innerHTML = '<span>You are subscribed!</span>';
+	        //document.getElementById("pushStatus").checked = true;
+	        //document.getElementById("pushStatusMsg").innerHTML = '<span>You are subscribed!</span>';
 	        pushStatus = true;
 	        return true;
 	      })
@@ -98,12 +99,12 @@ function sendSub(pushSubscription) {
 	
 	
 	// TODO: Server Route implementieren
-  fetch("http://localhost:3000/api/subscribe/"+subId).then(function(res) {
+  fetch("http://localhost:3000/api/subscribe/"+subId, { 'mode': 'no-cors' }).then(function(res) {
     res.json().then(function(data) {
       // Log the data for illustration
       console.log(data);
-    })
-  })
+    });
+  });
 }
 
 
@@ -114,6 +115,6 @@ function cancelSub(pushSubscription) {
 	  fetch("https://android.googleapis.com/unsubscribe/"+endpoint).then(function(res) {
 	    res.json().then(function(data) {
 	      console.log(data);
-	    })
-	  })
+	    });
+	  });
 	}

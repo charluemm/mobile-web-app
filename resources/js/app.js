@@ -37,7 +37,17 @@ $(document).on("pagebeforecreate",function(event){
     {
         var userToken = localStorage.getItem("auth-token");
         var target = event.target.id;
-
+        var gcmRegId = localStorage.getItem("gcmRegId");
+        
+        
+        if(gcmRegId){
+        	
+        }
+        else{
+        	
+        	checkSubscription();
+        }
+        
         if(userToken || target === "Register")
         {
             jQuery.mobile.changePage("#"+target, {

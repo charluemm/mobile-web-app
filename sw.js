@@ -5,6 +5,7 @@
  */
 
 var API_URL = "http://localhost/nodejs/api";
+var PUSH_URL = "http://localhost/nodejs/push";
 var VERSION = 'v49';
 
 this.addEventListener('install', function(event) {
