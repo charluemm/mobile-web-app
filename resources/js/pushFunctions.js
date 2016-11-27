@@ -99,7 +99,8 @@ function sendSub(pushSubscription) {
 	
 	
 	// TODO: Server Route implementieren
-  fetch("http://localhost:3000/api/subscribe/"+subId, { 'mode': 'no-cors' }).then(function(res) {
+  fetch("http://localhost:3000/api/subscribe/"+subId, { 'mode': 'cors' }).then(function(res) {
+	  console.log(res);
     res.json().then(function(data) {
       // Log the data for illustration
       console.log(data);
