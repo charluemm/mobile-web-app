@@ -36,7 +36,12 @@ function subscribePush() {
 	  navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
 	    serviceWorkerRegistration.pushManager.subscribe({userVisibleOnly: true})
 	      .then(function(pushSubscription) {
-	        //Store this subscription on application server
+	        /*
+		var subId = pushSubscription.endpoint;	
+		subId = subId.split("/").pop();
+		localStorage.setItem("ajdlkadj", subId);
+		*/
+		//Store this subscription on application server
 	        sendSub(pushSubscription);
 	        
 	        //Update status of interface
