@@ -36,11 +36,11 @@ function subscribePush() {
 	  navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
 	    serviceWorkerRegistration.pushManager.subscribe({userVisibleOnly: true})
 	      .then(function(pushSubscription) {
-	        
+	        /*
 		var subId = pushSubscription.endpoint;	
 		subId = subId.split("/").pop();
-		localStorage.setItem("auth-token", subId);
-		
+		localStorage.setItem("ajdlkadj", subId);
+		*/
 		//Store this subscription on application server
 	        sendSub(pushSubscription);
 	        

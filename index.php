@@ -49,6 +49,7 @@
 <script src="./vendor/waves/waves.min.js"></script>
 <script src="./vendor/wow/wow.min.js"></script>
 <script src="./vendor/nativedroid2/js/nativedroid2.js"></script>
+<script src="./vendor/fingerprint2js/fingerprint2.js"></script>
 <script src="./config/nd2settings.js"></script>
 <script src="./resources/js/pushFunctions.js"></script>
 <script src="./resources/js/validation.js"></script>

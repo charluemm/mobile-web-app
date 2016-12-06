@@ -29,6 +29,17 @@ if ('serviceWorker' in navigator)
         console.log('Registration failed with ' + error);
     });
 }
+// CHECK if unique device id exists
+$(document).ready(function(){
+    var deviceId = localStorage.getItem("deviceId");
+    if(deviceId === null)
+    {
+        new Fingerprint2().get(function(result, components){
+            localStorage.setItem("deviceId", result);
+            console.log("Set deviceId:" + result); //a hash, representing your device fingerprint
+        });
+    }
+});
 
 // CHECK AUTHENTICATION on each pageload
 $(document).on("pagebeforecreate",function(event){

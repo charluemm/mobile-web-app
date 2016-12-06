@@ -6,7 +6,7 @@
 
 var API_URL = "http://localhost/nodejs/api";
 var PUSH_URL = "http://localhost/nodejs/push";
-var VERSION = 'v49';
+var VERSION = 'v50';
 
 this.addEventListener('install', function(event) {
     event.waitUntil(
@@ -21,6 +21,7 @@ this.addEventListener('install', function(event) {
                 './vendor/nativedroid2/fonts/Material-Design-Iconic-Font.ttf?v=2.0.0',
                 './vendor/nativedroid2/fonts/Material-Design-Iconic-Font.woff?v=2.0.0',
                 './vendor/nativedroid2/js/nativedroid2.js',
+                './vendor/fingerprint2js/fingerprint2.js',
 
                 './vendor/font-awesome/css/font-awesome.min.css',
                 './vendor/font-awesome/fonts/FontAwesome.otf',
@@ -171,10 +172,9 @@ self.addEventListener('push', function(e) {
   console.log('push received');
  
   // Get the notification data, then display notification
-});
-
-fetch(API_URL + "/push/sw/latest.json").then(function(res) {
-    res.json().then(function(data) {
-          // Show notification       
+    fetch(API_URL + "/push/sw/latest.json").then(function(res) {
+        res.json().then(function(data) {
+            // Show notification
+        })
     })
-  })
+});
