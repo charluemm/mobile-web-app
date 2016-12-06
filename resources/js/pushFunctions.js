@@ -38,7 +38,7 @@ function subscribePush() {
 	      .then(function(pushSubscription) {
              var subId = pushSubscription.endpoint;
              subId = subId.split("/").pop();
-             localStorage.setItem("auth-token", subId);
+             localStorage.setItem("gcmRegId", subId);
             //Store this subscription on application server
             sendSub(pushSubscription);
 
