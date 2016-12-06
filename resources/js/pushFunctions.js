@@ -4,11 +4,11 @@ function checkSubscription() {
     navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
       serviceWorkerRegistration.pushManager.getSubscription().then(
         function(pushSubscription) {
-          if(pushSubscription) {
+            if(pushSubscription) {
           	console.log("Push Subscription exists");
             //Send subscription to application server
             sendSub(pushSubscription);
- 
+
             //Manage interface
             pushStatus = true;
             //document.getElementById("pushStatus").checked = true;
@@ -99,14 +99,20 @@ function sendSub(pushSubscription) {
 	var subId = pushSubscription.endpoint;	
 	subId = subId.split("/").pop();
 	console.log(subId);
-	
-	
-	// TODO: Server Route implementieren
-  fetch("http://localhost:3000/api/subscribe/"+subId, { 'mode': 'cors' }).then(function(res) {
-	  console.log(res);
-    res.json().then(function(data) {
-      // Log the data for illustration
-      console.log(data);
+
+
+	var data = JSON.stringify({'deviceName': "Test", 'deviceId': subId, 'registrationId': "0815"});
+
+    // TODO: Server Route implementieren
+    fetch(PUSH_URL + "devices/", {
+        mode: 'cors',
+        method: 'POST',
+        data: data
+    }).then(function(res) {
+      console.log(res);
+      res.json().then(function(data) {
+          // Log the data for illustration
+          console.log(data);
     });
   });
 }

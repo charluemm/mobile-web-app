@@ -39,6 +39,7 @@ $(document).ready(function(){
             console.log("Set deviceId: " + result); //a hash, representing your device fingerprint
         });
     }
+    console.log("DeviceID: " + deviceId);
 });
 
 // CHECK AUTHENTICATION on each pageload
@@ -50,21 +51,16 @@ $(document).on("pagebeforecreate",function(event){
         var target = event.target.id;
         var gcmRegId = localStorage.getItem("gcmRegId");
         
-        
-        
-        
-        if(gcmRegId){
-        	
-        	
+        if(gcmRegId)
+        {
         }
-        else{
-        	
+        else
+        {
         	checkSubscription()
-        		//localStorage.setItem
-        	
-        	
+            //localStorage.setItem
         }
-        
+
+        // check AUTHENTICATION
         if(userToken || target === "Register")
         {
             jQuery.mobile.changePage("#"+target, {
