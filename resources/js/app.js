@@ -36,7 +36,7 @@ $(document).ready(function(){
     {
         new Fingerprint2().get(function(result, components){
             localStorage.setItem("deviceId", result);
-            console.log("Set deviceId:" + result); //a hash, representing your device fingerprint
+            console.log("Set deviceId: " + result); //a hash, representing your device fingerprint
         });
     }
 });

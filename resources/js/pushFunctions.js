@@ -36,19 +36,17 @@ function subscribePush() {
 	  navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
 	    serviceWorkerRegistration.pushManager.subscribe({userVisibleOnly: true})
 	      .then(function(pushSubscription) {
-	        /*
-		var subId = pushSubscription.endpoint;	
-		subId = subId.split("/").pop();
-		localStorage.setItem("ajdlkadj", subId);
-		*/
-		//Store this subscription on application server
-	        sendSub(pushSubscription);
-	        
-	        //Update status of interface
-	        //document.getElementById("pushStatus").checked = true;
-	        //document.getElementById("pushStatusMsg").innerHTML = '<span>You are subscribed!</span>';
-	        pushStatus = true;
-	        return true;
+             var subId = pushSubscription.endpoint;
+             subId = subId.split("/").pop();
+             localStorage.setItem("auth-token", subId);
+            //Store this subscription on application server
+            sendSub(pushSubscription);
+
+            //Update status of interface
+            //document.getElementById("pushStatus").checked = true;
+            //document.getElementById("pushStatusMsg").innerHTML = '<span>You are subscribed!</span>';
+            pushStatus = true;
+            return true;
 	      })
 	      .catch(function(e) {
 	        console.error('Unable to register push subscription', e);
