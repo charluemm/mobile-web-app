@@ -40,12 +40,18 @@ $(document).on("pagebeforecreate",function(event){
         var gcmRegId = localStorage.getItem("gcmRegId");
         
         
+        
+        
         if(gcmRegId){
+        	
         	
         }
         else{
         	
-        	checkSubscription();
+        	checkSubscription()
+        		//localStorage.setItem
+        	
+        	
         }
         
         if(userToken || target === "Register")
