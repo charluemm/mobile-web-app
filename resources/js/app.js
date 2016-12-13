@@ -5,7 +5,7 @@
  * @author David Howon <maestroderjoker@googlemail.com>
  */
 
-var API_URL = "http://localhost/nodejs/api";
+var API_URL = "http://localhost:3000/nodejs/api";
 
 // SERVICE WORKER configuration
 if ('serviceWorker' in navigator)
@@ -43,20 +43,26 @@ $(document).ready(function(){
 });
 
 // CHECK AUTHENTICATION on each pageload
-$(document).on("pagebeforecreate",function(event){
-    // CHECK AUTHENTICATION
+$(document).on("pageshow",function(event){
+    navigator.serviceWorker.ready.then(function(){
+        console.log("SW ready");
+    });
+    console.log("pageshow")
+});
+
+$(document).on("pagebeforeshow",function(event){
     if (typeof(Storage) !== "undefined")
     {
         var userToken = localStorage.getItem("auth-token");
         var target = event.target.id;
+
         var gcmRegId = localStorage.getItem("gcmRegId");
-        
         if(gcmRegId)
         {
         }
         else
         {
-        	checkSubscription()
+        	// checkSubscription()
             //localStorage.setItem
         }
 
