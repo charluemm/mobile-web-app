@@ -1,5 +1,6 @@
-//checkSubscription
+var PUSH_URL = "http://127.0.0.1:3000/push";
 
+// /checkSubscription
 function checkSubscription() {
     navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
       serviceWorkerRegistration.pushManager.getSubscription().then(
@@ -93,7 +94,6 @@ function unsubscribePush() {
 
 // sendSub
 
-
 function sendSub(pushSubscription) {
 	
 	var subId = pushSubscription.endpoint;	
@@ -101,13 +101,17 @@ function sendSub(pushSubscription) {
 	console.log(subId);
 
 
-	var data = JSON.stringify({'deviceName': "Test", 'deviceId': subId, 'registrationId': "0815"});
+	var data = JSON.stringify({"deviceName": "Test", "deviceId": subId, "registrationId": "0815"});
+
+	console.log(data);
 
     // TODO: Server Route implementieren
-    fetch(PUSH_URL + "devices/", {
-        mode: 'cors',
+    fetch(PUSH_URL + "/devices/", {
+        mode: 'no-cors',
         method: 'POST',
-        data: data
+        data: data,
+        contentType:"application/json; charset=utf-8",
+        dataType:"json",
     }).then(function(res) {
       console.log(res);
       res.json().then(function(data) {

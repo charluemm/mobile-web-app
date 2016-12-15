@@ -140,40 +140,40 @@ self.addEventListener('push', function(event) {
     }));
 });
 
-// self.addEventListener('notificationclick', function(event) {
-//   console.log('Notification click: tag', event.notification.tag);
-//
-//   event.notification.close();
-//   var url = 'https://www.google.de';
-//
-//   event.waitUntil(
-//     clients.matchAll({
-//       type: 'window'
-//     })
-//     .then(function(windowClients) {
-//       console.log('WindowClients', windowClients);
-//       for (var i = 0; i < windowClients.length; i++) {
-//         var client = windowClients[i];
-//         console.log('WindowClient', client);
-//         if (client.url === url && 'focus' in client) {
-//           return client.focus();
-//         }
-//       }
-//       if (clients.openWindow) {
-//         return clients.openWindow(url);
-//       }
-//     })
-//   );
-// });
-//
-//
-// self.addEventListener('push', function(e) {
-//   console.log('push received');
-//
-//   // Get the notification data, then display notification
-//     fetch(API_URL + "/push/sw/latest.json").then(function(res) {
-//         res.json().then(function(data) {
-//             // Show notification
-//         })
-//     })
-// });
+self.addEventListener('notificationclick', function(event) {
+  console.log('Notification click: tag', event.notification.tag);
+
+  event.notification.close();
+  var url = 'https://www.google.de';
+
+  event.waitUntil(
+    clients.matchAll({
+      type: 'window'
+    })
+    .then(function(windowClients) {
+      console.log('WindowClients', windowClients);
+      for (var i = 0; i < windowClients.length; i++) {
+        var client = windowClients[i];
+        console.log('WindowClient', client);
+        if (client.url === url && 'focus' in client) {
+          return client.focus();
+        }
+      }
+      if (clients.openWindow) {
+        return clients.openWindow(url);
+      }
+    })
+  );
+});
+
+
+self.addEventListener('push', function(e) {
+  console.log('push received');
+
+  // Get the notification data, then display notification
+    fetch(API_URL + "/push/sw/latest.json").then(function(res) {
+        res.json().then(function(data) {
+            // Show notification
+        })
+    })
+});

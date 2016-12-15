@@ -47,7 +47,6 @@ $(document).on("pageshow",function(event){
     navigator.serviceWorker.ready.then(function(){
         console.log("SW ready");
     });
-    console.log("pageshow")
 });
 
 $(document).on("pagebeforeshow",function(event){
@@ -59,10 +58,13 @@ $(document).on("pagebeforeshow",function(event){
         var gcmRegId = localStorage.getItem("gcmRegId");
         if(gcmRegId)
         {
+            // Id vorhanden -> an Server übertragen und prüfen
         }
         else
         {
-        	// checkSubscription()
+            // RegId anfordern
+
+        	checkSubscription();
             //localStorage.setItem
         }
 
