@@ -98,20 +98,22 @@ function sendSub(pushSubscription) {
 	
 	var subId = pushSubscription.endpoint;	
 	subId = subId.split("/").pop();
-	console.log(subId);
+    localStorage.setItem('gcmRegId', subId);
 
+	var deviceId = localStorage.getItem('deviceId');
+	var deviceName = "Hier wird iwann der Username stehen";
 
-	var data = JSON.stringify({"deviceName": "Test", "deviceId": subId, "registrationId": "0815"});
-
-	console.log(data);
-
-    // TODO: Server Route implementieren
     fetch(PUSH_URL + "/devices/", {
-        mode: 'no-cors',
+        mode: 'cors',
         method: 'POST',
-        data: data,
-        contentType:"application/json; charset=utf-8",
-        dataType:"json",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: "deviceName="+deviceName+"&deviceId="+deviceId+"&registrationId="+subId,
+        // body: JSON.stringify(data),
+        // headers: {
+        //     'Content-Type': 'application/json; charset=UTF-8'
+        // },
     }).then(function(res) {
       console.log(res);
       res.json().then(function(data) {
