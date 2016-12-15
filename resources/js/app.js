@@ -58,14 +58,13 @@ $(document).on("pagebeforeshow",function(event){
         var gcmRegId = localStorage.getItem("gcmRegId");
         if(gcmRegId)
         {
+            // TODO: hier gehts weiter
             // Id vorhanden -> an Server übertragen und prüfen
         }
         else
         {
-            // RegId anfordern
-
+            // Subscription ID anfordern und an applicationserver übertragen
         	checkSubscription();
-            //localStorage.setItem
         }
 
         // check AUTHENTICATION
