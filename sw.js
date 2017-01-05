@@ -4,9 +4,9 @@
  * @author Michael Mueller <development@reu-network.de>
  */
 
-var API_URL = "http://localhost:3000/nodejs/api";
-var PUSH_URL = "http://localhost:3000/nodejs/push";
-var VERSION = 'v51';
+var API_URL = "http://localhost:3000/api";
+var PUSH_URL = "http://localhost:3000/push";
+var VERSION = 'v57';
 
 this.addEventListener('install', function(event) {
     event.waitUntil(
@@ -69,6 +69,8 @@ this.addEventListener('install', function(event) {
                 './resources/img/examples/card_thumb_3.jpg',
 
                 './resources/js/app.js',
+                './resources/js/pushFunctions.js',
+                './resources/js/validation.js',
                 './manifest.json',
                 './index.php'
             ]);

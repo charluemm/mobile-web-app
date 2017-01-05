@@ -5,7 +5,7 @@
  * @author David Howon <maestroderjoker@googlemail.com>
  */
 
-var API_URL = "http://localhost:3000/nodejs/api";
+var API_URL = "http://localhost:3000/api";
 
 // SERVICE WORKER configuration
 if ('serviceWorker' in navigator)
@@ -60,6 +60,7 @@ $(document).on("pagebeforeshow",function(event){
         {
             // TODO: hier gehts weiter
             // Id vorhanden -> an Server übertragen und prüfen
+            checkSubscription();
         }
         else
         {
@@ -89,50 +90,14 @@ $(document).on("pagebeforeshow",function(event){
     }
 });
 
-// SIGNUP
-// $('#submit-registration').on('click', function(e){
-//     e.preventDefault();
-//
-//     var data = $('#frmRegistration').serialize();
-//     $.ajax({
-//         type: "POST",
-//         url: API_URL + "/signup",
-//         data: data,
-//         success: function(data) {
-//             if (data.success){
-//                 jQuery.mobile.changePage("#Login", {
-//                     transition: "slide",
-//                     reverse: true,
-//                 });
-//                 new $.nd2Toast({
-//                     message: data.message + " Please log in.",
-//                     ttl: 3000
-//                 });
-//                 $('.nd2-toast').addClass('alert-success');
-//             }
-//             else
-//                 new $.nd2Toast({
-//                     message: data.message,
-//                     ttl: 3000
-//                 });
-//
-//             $('.nd2-toast').addClass('alert-danger');
-//         },
-//         error: function(xhr, options, error){
-//             new $.nd2Toast({
-//                 message: "Error occurred! " + error,
-//                 ttl: 3000
-//             });
-//             $('.nd2-toast').addClass('alert-danger');
-//         }
-//     })
-// });
-
 // LOGIN
 $('#submit-login').on('click', function(e){
     e.preventDefault();
     var data = $('#frmLogin').serialize();
     $.ajax({
+        type: "POST",
+        url: API_URL + "/authenticate",
+        data: data,
         success: function(data){
             if(data.success)
             {
@@ -154,9 +119,6 @@ $('#submit-login').on('click', function(e){
                 $('.nd2-toast').addClass('alert-danger');
             }
         },
-        type: "POST",
-        url: API_URL + "/authenticate",
-        data: data,
         error: function(xhr, options, error){
             new $.nd2Toast({
                 message: "Error occurred! " + error,

@@ -96,7 +96,8 @@ function unsubscribePush() {
 
 function sendSub(pushSubscription) {
 	
-	var subId = pushSubscription.endpoint;	
+	var subId = pushSubscription.endpoint;
+	console.log(subId);
 	subId = subId.split("/").pop();
     localStorage.setItem('gcmRegId', subId);
 
