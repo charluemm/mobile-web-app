@@ -6,7 +6,7 @@
 
 var API_URL = "http://localhost:3000/api";
 var PUSH_URL = "http://localhost:3000/push";
-var VERSION = 'v57';
+var VERSION = 'v64';
 
 this.addEventListener('install', function(event) {
     event.waitUntil(
@@ -71,6 +71,7 @@ this.addEventListener('install', function(event) {
                 './resources/js/app.js',
                 './resources/js/pushFunctions.js',
                 './resources/js/validation.js',
+                './resources/js/home.js',
                 './manifest.json',
                 './index.php'
             ]);

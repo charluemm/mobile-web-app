@@ -54,5 +54,6 @@
 <script src="./resources/js/pushFunctions.js"></script>
 <script src="./resources/js/validation.js"></script>
 <script src="./resources/js/app.js"></script>
+<script src="./resources/js/home.js"></script>
 </body>
 </html>

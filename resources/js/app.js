@@ -56,6 +56,37 @@ $(document).on("pagebeforeshow",function(event){
         var target = event.target.id;
 
         var gcmRegId = localStorage.getItem("gcmRegId");
+
+        if(target === "Register" || target == "Login")
+        {
+            if(userToken)
+            {
+                jQuery.mobile.changePage("#Home", {
+                    transition: "slide",
+                    reverse: false,
+                });
+            }
+            return;
+        }
+
+        // check AUTHENTICATION
+        if(userToken)
+        {
+            jQuery.mobile.changePage("#"+target, {
+                transition: "slide",
+                reverse: false,
+            });
+            return ;
+        }
+        else
+        {
+            jQuery.mobile.changePage("#Login", {
+                transition: "slide",
+                reverse: false,
+            });
+            return ;
+        }
+        // check push subscription
         if(gcmRegId)
         {
             // TODO: hier gehts weiter
@@ -65,23 +96,7 @@ $(document).on("pagebeforeshow",function(event){
         else
         {
             // Subscription ID anfordern und an applicationserver übertragen
-        	checkSubscription();
-        }
-
-        // check AUTHENTICATION
-        if(userToken || target === "Register")
-        {
-            jQuery.mobile.changePage("#"+target, {
-                transition: "slide",
-                reverse: false,
-            });
-        }
-        else
-        {
-            jQuery.mobile.changePage("#Login", {
-                transition: "slide",
-                reverse: false,
-            });
+            checkSubscription();
         }
     }
     else
@@ -91,7 +106,7 @@ $(document).on("pagebeforeshow",function(event){
 });
 
 // LOGIN
-$('#submit-login').on('click', function(e){
+$('#frmLogin').on('submit', function(e){
     e.preventDefault();
     var data = $('#frmLogin').serialize();
     $.ajax({
