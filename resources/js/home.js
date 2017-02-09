@@ -8,13 +8,8 @@
 var API_URL = "http://localhost:3000/api";
 
 $(document).on("pagecreate", "#Home", function () {
-    // $("div[role=main]").on("swipeleft", function (event) {
-    //     changeNavTab(true);
-    // });
-    //
-    // $("div[role=main]").on("swiperight", function (event) {
-    //     changeNavTab(false);
-    // });
+   //navigator.serviceWorker.ready.then(reload);
+
     if (typeof(Storage) !== "undefined")
     {
         var userToken = localStorage.getItem("auth-token");
@@ -26,7 +21,9 @@ $(document).on("pagecreate", "#Home", function () {
                 console.log(data);
                 if(data)
                 {
-
+                    $.each(data, function(index, element){
+                        console.log("aufgabe "+index+": ", element);
+                    });
                 }
                 else
                 {
@@ -39,7 +36,6 @@ $(document).on("pagecreate", "#Home", function () {
                 }
             },
             error: function(xhr, options, error){
-                console.log(xhr);
                 if(xhr.status == 403)
                 {
                     new $.nd2Toast({
@@ -48,10 +44,6 @@ $(document).on("pagecreate", "#Home", function () {
                     });
                     $('.nd2-toast').addClass('alert-danger');
                     localStorage.removeItem("auth-token");
-                    /*jQuery.mobile.changePage("#Login", {
-                        transition: "slide",
-                        reverse: false,
-                    }); */
                 }
                 else if(xhr.status == 0)
                 {

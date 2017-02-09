@@ -27,6 +27,8 @@ if ('serviceWorker' in navigator)
     {
         // registration failed
         console.log('Registration failed with ' + error);
+    }).then(function(){
+        checkSubscription();
     });
 }
 // CHECK if unique device id exists
@@ -43,12 +45,6 @@ $(document).ready(function(){
 });
 
 // CHECK AUTHENTICATION on each pageload
-$(document).on("pageshow",function(event){
-    navigator.serviceWorker.ready.then(function(){
-        console.log("SW ready");
-    });
-});
-
 $(document).on("pagebeforeshow",function(event){
     if (typeof(Storage) !== "undefined")
     {
@@ -85,18 +81,6 @@ $(document).on("pagebeforeshow",function(event){
                 reverse: false,
             });
             return ;
-        }
-        // check push subscription
-        if(gcmRegId)
-        {
-            // TODO: hier gehts weiter
-            // Id vorhanden -> an Server übertragen und prüfen
-            checkSubscription();
-        }
-        else
-        {
-            // Subscription ID anfordern und an applicationserver übertragen
-            checkSubscription();
         }
     }
     else

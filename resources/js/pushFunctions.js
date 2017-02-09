@@ -1,52 +1,40 @@
-var PUSH_URL = "http://127.0.0.1:3000/push";
+var PUSH_URL = "http://localhost:3000/push";
 
 // /checkSubscription
 function checkSubscription() {
-    navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
+	navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
       serviceWorkerRegistration.pushManager.getSubscription().then(
         function(pushSubscription) {
-            if(pushSubscription) {
-          	console.log("Push Subscription exists");
-            //Send subscription to application server
-            sendSub(pushSubscription);
-
-            //Manage interface
-            pushStatus = true;
-            //document.getElementById("pushStatus").checked = true;
-            //document.getElementById("pushStatusMsg").innerHTML = '<span>You are subscribed!</span>';
-          }
-          else {
-          	console.log("Push Subscription not existing");
-            subscribePush();
-          	//Manage interface
-            pushStatus = false;
-            //document.getElementById("pushStatus").checked = false;
-            //document.getElementById("pushStatusMsg").innerHTML = '<span>You are not subscribed!</span>';
-          }
+            if(pushSubscription)
+            {
+				console.log("Push Subscription exists");
+				// send subscription to application server
+				sendSub(pushSubscription);
+			}
+			else
+			{
+				console.log("Push Subscription not existing");
+				// create subscription
+				subscribePush();
+          	}
         }.bind(this)).catch(function(e) {
           console.error('Error getting subscription', e);
         });
     });
   }
 
-
-
-//subscribePush
-
+/**
+ * Subscribe push
+ *
+ * - creates push manager subscription
+ * - sends subscription to application server
+ */
 function subscribePush() {
 	  navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
 	    serviceWorkerRegistration.pushManager.subscribe({userVisibleOnly: true})
 	      .then(function(pushSubscription) {
-             var subId = pushSubscription.endpoint;
-             subId = subId.split("/").pop();
-             localStorage.setItem("gcmRegId", subId);
-            //Store this subscription on application server
+             //Store this subscription on application server
             sendSub(pushSubscription);
-
-            //Update status of interface
-            //document.getElementById("pushStatus").checked = true;
-            //document.getElementById("pushStatusMsg").innerHTML = '<span>You are subscribed!</span>';
-            pushStatus = true;
             return true;
 	      })
 	      .catch(function(e) {
@@ -56,53 +44,40 @@ function subscribePush() {
 	  });
 	}
 
-//unsubribePush
-
+/**
+ * unsubscribe push
+ *
+ * - unsubscribe push manager
+ * - remove subscription from application server
+ */
 function unsubscribePush() {
 	  console.log('unsubscribing...');
-	  navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {  
-	 
-	    serviceWorkerRegistration.pushManager.getSubscription().then(  
-	      function(pushSubscription) {  
-	        // Check we have a subscription to unsubscribe  
-	        if (!pushSubscription) {  
-	          // Nothing to unsubscribe, set checkboox interface unchecked...
-	          document.getElementById("pushStatus").checked = false;
-	          document.getElementById("pushStatusMsg").innerHTML = '<span>You are not subscribed!</span>';
-	          pushStatus = false;
-	          return;  
-	        }  
-	 
-	        // We have a subscription, so remove it from applications server...
-	        cancelSub(pushSubscription);
-	 
-	        //... and unsubscribe it
-	        pushSubscription.unsubscribe().then(function() {  
-	          //User unchecked the checkbox, but let's make sure
-	          document.getElementById("pushStatus").checked = false;
-	          document.getElementById("pushStatusMsg").innerHTML = '<span>You are not subscribed!</span>';
-	          pushStatus = false;
-	        }).catch(function(e) {  
-	          console.log('Error unsubscribing: ', e);  
-	        });  
-	      }).catch(function(e) {  
-	        console.error('Error unsubscribing.', e);  
-	      });  
+	  navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
+
+	    serviceWorkerRegistration.pushManager.getSubscription()
+			.then(
+			  function(pushSubscription) {
+				// We have a subscription, so remove it from applications server...
+				cancelSub(pushSubscription);
+				//... and unsubscribe it
+				pushSubscription.unsubscribe().then(function() {}).catch(function(e) {
+				  console.log('Error unsubscribing: ', e);
+				});
+			  })
+			.catch(function(e) {
+	        	console.error('Error unsubscribing.', e);
+	      	});
 	  });  
 	}
 
-
-// sendSub
-
+/**
+ * send Subscription to application server
+ */
 function sendSub(pushSubscription) {
-	
-	var subId = pushSubscription.endpoint;
-	console.log(subId);
-	subId = subId.split("/").pop();
-    localStorage.setItem('gcmRegId', subId);
-
 	var deviceId = localStorage.getItem('deviceId');
 	var deviceName = "Hier wird iwann der Username stehen";
+    var subId = pushSubscription.endpoint;
+    subId = subId.split("/").pop();
 
     fetch(PUSH_URL + "/devices/", {
         mode: 'cors',
@@ -111,25 +86,24 @@ function sendSub(pushSubscription) {
             "Content-Type": "application/x-www-form-urlencoded"
         },
         body: "deviceName="+deviceName+"&deviceId="+deviceId+"&registrationId="+subId,
-        // body: JSON.stringify(data),
-        // headers: {
-        //     'Content-Type': 'application/json; charset=UTF-8'
-        // },
-    }).then(function(res) {
-      console.log(res);
-      res.json().then(function(data) {
-          // Log the data for illustration
-          console.log(data);
-    });
+    })
+		.then(function(res) {
+		  console.log(res);
+		  res.json()
+			  .then(function(data) {
+				  // Log the data for illustration
+				  console.log(data);
+			});
   });
 }
-
-
-//cancelSub
-
+/**
+ * cancel subscription
+ *
+ * - remove subscription from application server
+ */
 function cancelSub(pushSubscription) {
-	  const endPoint = pushSubscription.endpoint.slice(pushSubscription.endpoint.lastIndexOf('/')+1);
-	  fetch("https://android.googleapis.com/unsubscribe/"+endpoint).then(function(res) {
+	  const endPoint = pushSubscription.endpoint.slice(pushSubscription.endpoint.lastIndexOf('/') + 1);
+	  fetch(PUSH_URL + "/unsubscribe/"+endpoint).then(function(res) {
 	    res.json().then(function(data) {
 	      console.log(data);
 	    });

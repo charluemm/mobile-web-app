@@ -6,7 +6,7 @@
 
 var API_URL = "http://localhost:3000/api";
 var PUSH_URL = "http://localhost:3000/push";
-var VERSION = 'v64';
+var VERSION = 'v98';
 
 this.addEventListener('install', function(event) {
     event.waitUntil(
@@ -134,13 +134,33 @@ this.addEventListener('activate', function(event) {
 self.addEventListener('push', function(event) {
   console.log('Push message', event);
 
-  var title = 'Push Message';
+    /** TODO:
+     * - beim Server nachfragen, was neu ist
+     */
 
-  event.waitUntil(
-    self.registration.showNotification(title, {
-      'body': 'The Message',
-      'icon': 'img/icon.png'
-    }));
+        // TODO: latest cachen und network first
+    // Get the notification data, then display notification
+    var test = fetch(PUSH_URL + "/latest").then(function(res) {
+        res.json().then(function(data) {
+            if(data.type == "update")
+            {
+                return JSON.stringify(data.body);
+            }
+            else
+            {
+                // Show notification
+                event.waitUntil(
+                    self.registration.showNotification(data.title, {
+                        'body': data.body,
+                        'icon': data.icon
+                }));
+            }
+        }).then(function(result) {
+            console.log(result);
+            self.localStorage.setItem('app_state', result);
+        });
+    });
+
 });
 
 self.addEventListener('notificationclick', function(event) {
@@ -169,14 +189,3 @@ self.addEventListener('notificationclick', function(event) {
   );
 });
 
-
-self.addEventListener('push', function(e) {
-  console.log('push received');
-
-  // Get the notification data, then display notification
-    fetch(API_URL + "/push/sw/latest.json").then(function(res) {
-        res.json().then(function(data) {
-            // Show notification
-        })
-    })
-});
