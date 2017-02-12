@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="de">
 <head>
-	<title>task notification</title>
+	<title>tasky</title>
 	<meta name="viewport" content="minimal-ui, width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
@@ -46,14 +46,16 @@
 <script src="./vendor/jquery-ui/jquery-ui.min.js"></script>
 <script src="./vendor/jquery-validate/jquery.validate.min.js"></script>
 <script src="./vendor/jquery-mobile/jquery.mobile-1.4.5.min.js"></script>
+<script src="./vendor/idb/lib/idb.js"></script>
 <script src="./vendor/waves/waves.min.js"></script>
 <script src="./vendor/wow/wow.min.js"></script>
 <script src="./vendor/nativedroid2/js/nativedroid2.js"></script>
 <script src="./vendor/fingerprint2js/fingerprint2.js"></script>
 <script src="./config/nd2settings.js"></script>
 <script src="./resources/js/pushFunctions.js"></script>
-<script src="./resources/js/validation.js"></script>
+<script src="./resources/js/indexedDB.js"></script>
 <script src="./resources/js/app.js"></script>
+<script src="./resources/js/validation.js"></script>
 <script src="./resources/js/home.js"></script>
 </body>
 </html>

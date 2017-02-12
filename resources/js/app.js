@@ -28,11 +28,32 @@ if ('serviceWorker' in navigator)
         // registration failed
         console.log('Registration failed with ' + error);
     }).then(function(){
-        checkSubscription();
+        navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
+            serviceWorkerRegistration.pushManager.getSubscription().then(
+                function(pushSubscription) {
+                    if(pushSubscription)
+                    {
+                        console.log("Push Subscription exists");
+                        // send subscription to application server
+                        sendSub(pushSubscription);
+                    }
+                    else
+                    {
+                        console.log("Push Subscription not existing");
+                        // create subscription
+                        subscribePush();
+                    }
+                }.bind(this)).catch(function(e) {
+                console.error('Error getting subscription', e);
+            });
+        });
     });
 }
+
 // CHECK if unique device id exists
 $(document).ready(function(){
+
+    // store device id
     var deviceId = localStorage.getItem("deviceId");
     if(deviceId === null)
     {
@@ -42,6 +63,9 @@ $(document).ready(function(){
         });
     }
     console.log("DeviceID: " + deviceId);
+
+    // update indexedDB
+//    var authToken = localStorage.getItem("auth-token");
 });
 
 // CHECK AUTHENTICATION on each pageload
@@ -100,6 +124,10 @@ $('#frmLogin').on('submit', function(e){
         success: function(data){
             if(data.success)
             {
+                if(window.indexedDB)
+                {
+
+                }
                 // save token in local storage
                 localStorage.setItem("auth-token", data.token);
                 // redirect to #Home

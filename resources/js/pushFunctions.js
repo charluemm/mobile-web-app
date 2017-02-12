@@ -1,28 +1,5 @@
 var PUSH_URL = "http://localhost:3000/push";
 
-// /checkSubscription
-function checkSubscription() {
-	navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
-      serviceWorkerRegistration.pushManager.getSubscription().then(
-        function(pushSubscription) {
-            if(pushSubscription)
-            {
-				console.log("Push Subscription exists");
-				// send subscription to application server
-				sendSub(pushSubscription);
-			}
-			else
-			{
-				console.log("Push Subscription not existing");
-				// create subscription
-				subscribePush();
-          	}
-        }.bind(this)).catch(function(e) {
-          console.error('Error getting subscription', e);
-        });
-    });
-  }
-
 /**
  * Subscribe push
  *
@@ -33,8 +10,9 @@ function subscribePush() {
 	  navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
 	    serviceWorkerRegistration.pushManager.subscribe({userVisibleOnly: true})
 	      .then(function(pushSubscription) {
-             //Store this subscription on application server
-            sendSub(pushSubscription);
+
+	          //Store this subscription on application server
+              sendSub(pushSubscription);
             return true;
 	      })
 	      .catch(function(e) {
@@ -76,24 +54,26 @@ function unsubscribePush() {
 function sendSub(pushSubscription) {
 	var deviceId = localStorage.getItem('deviceId');
 	var deviceName = "Hier wird iwann der Username stehen";
-    var subId = pushSubscription.endpoint;
-    subId = subId.split("/").pop();
+    var endpoint = pushSubscription.endpoint;
+    var subId = endpoint.split("/").pop();
 
+
+    localStorage.setItem('gcm-regid', subId);
+
+    var authToken = localStorage.getItem("auth-token");
     fetch(PUSH_URL + "/devices/", {
         mode: 'cors',
         method: 'POST',
         headers: {
-            "Content-Type": "application/x-www-form-urlencoded"
-        },
-        body: "deviceName="+deviceName+"&deviceId="+deviceId+"&registrationId="+subId,
+            "Content-Type": "application/x-www-form-urlencoded",
+	    },
+        body: "deviceName="+deviceName+"&deviceId="+deviceId+"&registrationId="+subId+"&endpoint="+endpoint+"&token="+authToken,
     })
 		.then(function(res) {
-		  console.log(res);
-		  res.json()
-			  .then(function(data) {
-				  // Log the data for illustration
-				  console.log(data);
-			});
+		  res.json().then(function(data) {
+              // Log the data for illustration
+              console.log(data);
+        });
   });
 }
 /**

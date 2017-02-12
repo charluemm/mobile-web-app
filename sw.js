@@ -6,11 +6,80 @@
 
 var API_URL = "http://localhost:3000/api";
 var PUSH_URL = "http://localhost:3000/push";
-var VERSION = 'v98';
+var VERSION = 'v38';
 
 this.addEventListener('install', function(event) {
+    console.log('The service worker is being installed.');
+    event.waitUntil(precache()
+        .then(function(){
+            return self.skipWaiting();
+        })
+    );
+});
+
+this.addEventListener('fetch', function(event) {
+    console.log('The service worker is serving the asset.');
+
+    // if (event.request.method !== 'GET') { return; }
+    // if (event.request.url.indexOf(API_URL) !== -1) { return; }
+
+    event.respondWith(
+        // try to return request from network
+        fetch(event.request.url).catch(function(){
+            // if fails, try to return request from cache
+            return caches.match(event.request).then(function(response){
+                //Check if we received a valid response
+                if(!response || response.status !== 200 || response.type !== 'basic') {
+                    return response;
+                }
+                return response;
+            })
+        })
+    );
+        // caches.match(event.request)
+        //     .then(function(response) {
+        //         //Cache hit - return response
+        //         if (response) {
+        //             return response;
+        //         }
+        //         var fetchRequest = event.request.clone();
+        //
+        //         return fetch(fetchRequest).then(
+        //             function(response) {
+        //                 //Check if we received a valid response
+        //                 if(!response || response.status !== 200 || response.type !== 'basic') {
+        //                     return response;
+        //                 }
+        //                 var responseToCache = response.clone();
+        //
+        //                 caches.open(VERSION)
+        //                     .then(function(cache) {
+        //                         cache.put(event.request, responseToCache);
+        //                     });
+        //
+        //                 return response;
+        //             }
+        //         );
+        //     })
+        // );
+});
+
+this.addEventListener('activate', function(event) {
+    var cacheWhitelist = [VERSION];
+
     event.waitUntil(
-        caches.open(VERSION).then(function(cache) {
+        caches.keys().then(function(keyList) {
+            return Promise.all(keyList.map(function(key) {
+                if (cacheWhitelist.indexOf(key) === -1) {
+                    return caches.delete(key);
+                }
+            }));
+        })
+    )
+});
+
+function precache(){
+        return caches.open(VERSION).then(function(cache) {
             return cache.addAll([
                 './vendor/nativedroid2/css/nativedroid2.color.blue-grey.css',
                 './vendor/nativedroid2/css/nativedroid2.color.teal.css',
@@ -47,6 +116,10 @@ this.addEventListener('install', function(event) {
                 './vendor/wow/animate.css',
                 './vendor/wow/wow.min.js',
 
+                './vendor/idb/',
+                './vendor/idb/lib/',
+                './vendor/idb/lib/idb.js',
+
                 './config/nd2settings.js',
                 './fragments/bottom.sheet.html',
                 './fragments/panel.left.html',
@@ -73,78 +146,40 @@ this.addEventListener('install', function(event) {
                 './resources/js/validation.js',
                 './resources/js/home.js',
                 './manifest.json',
-                './index.php'
+                './index.php',
+                './'
             ]);
-        })
-    );
-});
+        });
+}
 
-this.addEventListener('fetch', function(event) {
+function getEndpoint() {
+    return self.registration.pushManager.getSubscription()
+        .then(function(subscription) {
+            if (subscription) {
+                return subscription.endpoint;
+            }
 
-    if (event.request.method !== 'GET') { return; }
-    if (event.request.url.indexOf(API_URL) !== -1) { return; }
-
-    event.respondWith(
-        caches.match(event.request)
-            .then(function(response) {
-                //Cache hit - return response
-                if (response) {
-                    return response;
-                }
-                var fetchRequest = event.request.clone();
-
-                return fetch(fetchRequest).then(
-                    function(response) {
-                        //Check if we received a valid response
-                        if(!response || response.status !== 200 || response.type !== 'basic') {
-                            return response;
-                        }
-                        var responseToCache = response.clone();
-
-                        caches.open(VERSION)
-                            .then(function(cache) {
-                                cache.put(event.request, responseToCache);
-                            });
-
-                        return response;
-                    }
-                );
-            })
-    );
-});
-
-this.addEventListener('activate', function(event) {
-    var cacheWhitelist = [VERSION];
-
-    event.waitUntil(
-        caches.keys().then(function(keyList) {
-            return Promise.all(keyList.map(function(key) {
-                if (cacheWhitelist.indexOf(key) === -1) {
-                    return caches.delete(key);
-                }
-            }));
-        })
-    );
-});
-
-
-
-// @author DavidHowon   
+            throw new Error('User not subscribed');
+        });
+}
+// @author DavidHowon
 // Push Message with Icon and redirect to Google.de
 self.addEventListener('push', function(event) {
-  console.log('Push message', event);
+    console.log('Push message', event);
 
-    /** TODO:
-     * - beim Server nachfragen, was neu ist
-     */
-
-        // TODO: latest cachen und network first
-    // Get the notification data, then display notification
-    var test = fetch(PUSH_URL + "/latest").then(function(res) {
-        res.json().then(function(data) {
+    event.waitUntil(getEndpoint().then(function(endpoint){
+        var subId = endpoint.split("/").pop();
+        var request = new Request(PUSH_URL + "/getPayload/"+subId, {
+            method: 'GET',
+            mode: 'cors',
+            redirect: 'follow'
+        });
+        return fetch(request);
+    }).then(function(res) {
+        res.json().then(function(data){
             if(data.type == "update")
             {
-                return JSON.stringify(data.body);
+
             }
             else
             {
@@ -153,39 +188,35 @@ self.addEventListener('push', function(event) {
                     self.registration.showNotification(data.title, {
                         'body': data.body,
                         'icon': data.icon
-                }));
+                    }));
             }
-        }).then(function(result) {
-            console.log(result);
-            self.localStorage.setItem('app_state', result);
-        });
-    });
-
+            console.log(data);
+        })
+        }));
 });
 
 self.addEventListener('notificationclick', function(event) {
-  console.log('Notification click: tag', event.notification.tag);
+    console.log('Notification click: tag', event.notification.tag);
 
-  event.notification.close();
-  var url = 'https://www.google.de';
+    event.notification.close();
+    var url = 'http://localhost/task-notification/#Home';
 
-  event.waitUntil(
-    clients.matchAll({
-      type: 'window'
-    })
-    .then(function(windowClients) {
-      console.log('WindowClients', windowClients);
-      for (var i = 0; i < windowClients.length; i++) {
-        var client = windowClients[i];
-        console.log('WindowClient', client);
-        if (client.url === url && 'focus' in client) {
-          return client.focus();
-        }
-      }
-      if (clients.openWindow) {
-        return clients.openWindow(url);
-      }
-    })
-  );
+    event.waitUntil(
+        clients.matchAll({
+            type: 'window'
+        })
+            .then(function(windowClients) {
+                console.log('WindowClients', windowClients);
+                for (var i = 0; i < windowClients.length; i++) {
+                    var client = windowClients[i];
+                    console.log('WindowClient', client);
+                    if (client.url === url && 'focus' in client) {
+                        return client.focus();
+                    }
+                }
+                if (clients.openWindow) {
+                    return clients.openWindow(url);
+                }
+            })
+    );
 });
-

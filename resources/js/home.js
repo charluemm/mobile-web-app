@@ -9,7 +9,7 @@ var API_URL = "http://localhost:3000/api";
 
 $(document).on("pagecreate", "#Home", function () {
    //navigator.serviceWorker.ready.then(reload);
-
+return ;
     if (typeof(Storage) !== "undefined")
     {
         var userToken = localStorage.getItem("auth-token");
