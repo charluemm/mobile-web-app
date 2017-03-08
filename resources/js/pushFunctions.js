@@ -1,3 +1,10 @@
+/**
+ * push functions
+ *
+ * @author Michael Mueller <s147105@hft-leipzig.de>
+ * @author David Howon <s147102@hft-leipzig.de>
+ */
+
 var PUSH_URL = "http://localhost:3000/push";
 
 /**
@@ -45,7 +52,7 @@ function unsubscribePush() {
 			.catch(function(e) {
 	        	console.error('Error unsubscribing.', e);
 	      	});
-	  });  
+	  });
 	}
 
 /**

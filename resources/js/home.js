@@ -1,15 +1,15 @@
 /**
  * handle home ui interaction
  *
- * @author Michael Mueller <development@reu-network.de>
- * @author David Howon <maestroderjoker@googlemail.com>
+ * @author Michael Mueller <s147105@hft-leipzig.de>
+ * @author David Howon <s147102@hft-leipzig.de>
  */
 
 var API_URL = "http://localhost:3000/api";
 
 $(document).on("pagecreate", "#Home", function () {
    //navigator.serviceWorker.ready.then(reload);
-return ;
+   return ;
     if (typeof(Storage) !== "undefined")
     {
         var userToken = localStorage.getItem("auth-token");

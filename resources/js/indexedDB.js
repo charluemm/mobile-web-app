@@ -1,7 +1,8 @@
 /**
  * file to configure and handle indexDB
  *
- * @author Michael Mueller <development@reu-network.de>
+ * @author Michael Mueller <s147105@hft-leipzig.de>
+ * @author David Howon <s147102@hft-leipzig.de>
  */
 
 // configure indexDB

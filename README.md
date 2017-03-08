@@ -1,4 +1,4 @@
-# TaskY (Task Notification)
+# TaskY - Mobile WebApp
 
 - uses [**nativeDroid2**](http://nativedroid.godesign.ch/) jQuery mobile theme in material design as frontend UI
 
@@ -7,16 +7,14 @@
 
 [**Demo** page](https://tasky.atria.uberspace.de/)
 
+## Installation
 
-## Anforderungen
+### clone repository
 
-- Web app im Browser
-- Mehrbenutzer
-- Verwaltung von Aufgabenlisten
-- Erstellen, Bearbeiten, Teilen von eigenen Listen mit anderen Benutzern
-- Benutzergruppen
-- Benachrichtigung, wenn
-    - neue Aufgabenliste geteilt wird
-    - Änderungen an einer Liste gemacht wurden
-- Benachrichtigung im Fenster, wenn App im Browser gestartet
-- Benachrichtigung als Push-Notification, wenn  App nicht gestartet
+```bash
+git clone https://github.com/task-notification/mobile-web-app.git
+```
+
+### run
+
+visit ``http://localhost/mobile-web-app/``
