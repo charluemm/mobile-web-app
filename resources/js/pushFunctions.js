@@ -7,6 +7,31 @@
 
 var PUSH_URL = "http://localhost:3000/push";
 
+function registerPushManager(){
+    if(localStorage.getItem('auth-token'))
+    {
+        navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
+            serviceWorkerRegistration.pushManager.getSubscription().then(
+                function(pushSubscription) {
+                    if(pushSubscription)
+                    {
+                        console.log("Push Subscription exists");
+                        // send subscription to application server
+                        sendSub(pushSubscription);
+                    }
+                    else
+                    {
+                        console.log("Push Subscription not existing");
+                        // create subscription
+                        subscribePush();
+                    }
+                }.bind(this)).catch(function(e) {
+                console.error('Error getting subscription', e);
+            });
+        });
+    }
+}
+
 /**
  * Subscribe push
  *
@@ -64,7 +89,6 @@ function sendSub(pushSubscription) {
     var endpoint = pushSubscription.endpoint;
     var subId = endpoint.split("/").pop();
 
-
     localStorage.setItem('gcm-regid', subId);
 
     var authToken = localStorage.getItem("auth-token");
@@ -76,12 +100,17 @@ function sendSub(pushSubscription) {
 	    },
         body: "deviceName="+deviceName+"&deviceId="+deviceId+"&registrationId="+subId+"&endpoint="+endpoint+"&token="+authToken,
     })
-		.then(function(res) {
-		  res.json().then(function(data) {
-              // Log the data for illustration
-              console.log(data);
-        });
-  });
+    .catch(function(){
+        console.error("could not fetch device api uri");
+        return;
+    })
+	.then(function(res) {
+	  res.json().then(function(data) {
+	      console.log("RegistrationId: " + subId);
+		  // Log the data for illustration
+		  console.log(data);
+	  });
+  	});
 }
 /**
  * cancel subscription

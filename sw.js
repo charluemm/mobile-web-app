@@ -6,7 +6,7 @@
 
 var API_URL = "http://localhost:3000/api";
 var PUSH_URL = "http://localhost:3000/push";
-var VERSION = 'v38';
+var VERSION = 'v58';
 
 this.addEventListener('install', function(event) {
     console.log('The service worker is being installed.');
@@ -21,7 +21,7 @@ this.addEventListener('fetch', function(event) {
     console.log('The service worker is serving the asset.');
 
     // if (event.request.method !== 'GET') { return; }
-    // if (event.request.url.indexOf(API_URL) !== -1) { return; }
+    if (event.request.url.indexOf(API_URL) !== -1) { return; }
 
     event.respondWith(
         // try to return request from network
@@ -184,11 +184,10 @@ self.addEventListener('push', function(event) {
             else
             {
                 // Show notification
-                event.waitUntil(
-                    self.registration.showNotification(data.title, {
+                self.registration.showNotification(data.title, {
                         'body': data.body,
                         'icon': data.icon
-                    }));
+                });
             }
             console.log(data);
         })

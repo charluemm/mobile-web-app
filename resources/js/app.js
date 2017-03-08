@@ -28,25 +28,8 @@ if ('serviceWorker' in navigator)
         // registration failed
         console.log('Registration failed with ' + error);
     }).then(function(){
-        navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
-            serviceWorkerRegistration.pushManager.getSubscription().then(
-                function(pushSubscription) {
-                    if(pushSubscription)
-                    {
-                        console.log("Push Subscription exists");
-                        // send subscription to application server
-                        sendSub(pushSubscription);
-                    }
-                    else
-                    {
-                        console.log("Push Subscription not existing");
-                        // create subscription
-                        subscribePush();
-                    }
-                }.bind(this)).catch(function(e) {
-                console.error('Error getting subscription', e);
-            });
-        });
+        console.log("register push...");
+        registerPushManager();
     });
 }
 
@@ -92,6 +75,8 @@ $(document).on("pagebeforeshow",function(event){
         // check AUTHENTICATION
         if(userToken)
         {
+            registerPushManager();
+
             jQuery.mobile.changePage("#"+target, {
                 transition: "slide",
                 reverse: false,
@@ -106,6 +91,7 @@ $(document).on("pagebeforeshow",function(event){
             });
             return ;
         }
+
     }
     else
     {
